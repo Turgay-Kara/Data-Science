@@ -1,5 +1,5 @@
 """
-        VERI MANIPULASYONU (Pandas)
+        VERI MANIPULASYONU (NumPy & Pandas)
 """
 
 #Pandas: Verileri duzenleme, analize etme ve isleme
@@ -200,8 +200,8 @@ print(df)
 
 
     # loc: Tanimlandigi sekli ile secim yapmak icin kullanilir.
-import numpy as np
-import pandas as pd
+#import numpy as np
+#import pandas as pd
 #m = np.random.randint(1,30, size = (10,3))
 #df = pd.DataFrame(m ,columns =  ["var1","var2","var3"]) 
 #print(df)
@@ -371,3 +371,111 @@ def filter_func(x):
 print(df.groupby("gruplar").std())
 print(df.groupby("gruplar").filter(filter_func))    #-> Standart sapmasi > 9 olan verileri getir.
 """
+
+
+
+    # Transform
+"""    
+# Veri seti degiskenlerinde Donusturme islemi.
+
+import pandas as pd
+df = pd.DataFrame({'gruplar': ["A", "B", "C", "A", "B", "C"],
+                   'degisken1': [10,23,33,22,11,99],
+                   'degisken2': [100,252,333,262,111,969]},
+                   columns= ['gruplar', 'degisken1', 'degisken2'])
+
+#print(df["degisken1"]*9)
+
+df_a = df.iloc[:, 1:3]     #-> Hepsini sec 1 ve 2. sutunu al. (Alttaki islemi sayisal degerlerle yaptigimiz icin gruplar satirini sildik.)
+print(df_a.transform(lambda x: (x-x.mean()) / x.std()))
+# Her degiskenden bu veri setinin ortalamasini cikar ve her degiskenin standart sapmasina bol.
+"""
+
+
+
+    # Apply
+# Degiskenler uzerinden degisiklikler yapma, toplulastirma.
+"""
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'degisken1': [10,23,33,22,11,99],
+                   'degisken2': [100,252,333,262,111,969]},
+                   columns= ['degisken1', 'degisken2'])
+
+print(df.apply(np.sum))     #-> Degiskenleri topla.
+print(df.apply(np.mean))    #-> Degiskenlerin ortalamalarini al.
+
+"""
+
+
+    # pandas goruntu ayarlari
+import pandas as pd
+# Tüm sütunların görüntülenmesini sağla
+pd.set_option('display.max_columns', None)
+
+# Tüm satırların görüntülenmesini sağla
+pd.set_option('display.max_rows', None)
+
+# Geniş DataFrame'lerde satırların kırılmasını engelle
+pd.set_option('display.expand_frame_repr', False)
+
+
+
+    # Pivot Tablolar
+#import pandas as pd
+#import seaborn as sns
+#titanic = sns.load_dataset("titanic")
+#print(titanic.head())
+#print(titanic.groupby("sex")["survived"].mean())
+#print(titanic.groupby(["sex", "class"], observed=False)["survived"].aggregate("mean").unstack())
+
+
+    # Pivot table ile Kisa yontem:
+#import pandas as pd
+#import seaborn as sns
+#titanic = sns.load_dataset("titanic")
+#print(titanic.pivot_table("survived", index="sex", columns="class", observed=False))    #-> ovserved=False veya True hata onlemek icin.
+#print(titanic.age.head())
+
+#age = pd.cut(titanic["age"], [0,18,90])
+#print(age.head(10))
+
+#print(titanic.pivot_table("survived", ["sex", age], "class", observed = True))
+
+
+
+    # Dis Kaynakli Veri Okuma
+# https://github.com/mvahit/reading_data
+# print(help(pd.read_csv))
+import pandas as pd
+
+    # csv Okuma
+#print(pd.read_csv("reading_data/ornekcsv.csv", sep = ";"))     # Default ayrac "," oldugu icin hatali okudu bunun icin sep = ";" calistirdik.
+# ilk arguman okunmak istenen dosyanin konumu   # ikinci arguman sep = "datada kullanilan ayirma operatoru"
+
+
+    # txt Okuma
+#print(pd.read_csv("reading_data/duz_metin.txt"))
+
+
+    # excel Okuma
+#print(pd.read_excel("reading_data/ornekx.xlsx"))
+
+
+#df = pd.read_excel("reading_data/ornekx.xlsx")
+#print(type(df))     #-> >> DataFrame oldugu icin Pandasta gormus oldugumuz fonksiyonlari burada da uygulayabiliriz:
+
+
+#print(df.head())
+#df.columns = ["A", "B", "C"]
+#print(df)
+
+
+
+    # 0'dan Data Okuma
+#print(pd.read_csv("reading_data/tips.csv"))
+
+    # or
+
+#tips = pd.read_csv("reading_data/data.txt")
+#print(tips.head())
