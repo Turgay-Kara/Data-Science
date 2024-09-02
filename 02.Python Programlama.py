@@ -1,3 +1,7 @@
+"""
+        PYTHON PROGRAMLAMA
+"""
+
 """____________________________________________
    | Best way to learn a language is to use it #
    | 1.Gunluk kod yazin.                       #
