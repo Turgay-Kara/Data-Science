@@ -10,15 +10,15 @@ pd.set_option('display.expand_frame_repr', False)
 
   # Veriye ilk Bakis
 
-import seaborn as sns
-planets = sns.load_dataset("planets")
+#import seaborn as sns
+#planets = sns.load_dataset("planets")
 
-df = planets.copy()     #-> Ana veri setinin yapisini yedekledik.
+#df = planets.copy()     #-> Ana veri setinin yapisini yedekledik.
 
 #print(df.info())
 #print(df.dtypes)
 
-df.method = pd.Categorical(df.method)   #-> Method'u object'ten, category'ye donustur.
+#df.method = pd.Categorical(df.method)   #-> Method'u object'ten, category'ye donustur.
 #print(df.head())
 
 #print(df.shape)                         #>> (1035, 6)
@@ -36,10 +36,67 @@ df.method = pd.Categorical(df.method)   #-> Method'u object'ten, category'ye don
 
 
   # Eksik Degerlerin incelenmesi
+#import seaborn as sns
+#planets = sns.load_dataset("planets")
+#df = planets.copy()
+#print(df.head())
+
+#print(df.isnull().values.any())                                        #-> Eksik deger var mi?  >> True
+#print(df.isnull().sum())                                               #-> Hangi degiskende kac tane eksik var?
+#df['orbital_period'] = df['orbital_period'].fillna(0)                  #-> NaN degerleri 0 olarak degistirir.
+#df["mass"] = df["mass"].fillna(df.mass.mean())                         #-> NaN degerleri 0 olarak degistirmek yerine Ortalamalarini yazdik.
+
+#numeric_cols = df.select_dtypes(include='number')                      #-> Yalnizca sayisal sutunlari secin.
+#df[numeric_cols.columns] = numeric_cols.fillna(numeric_cols.mean())    #-> Tum veri setindeki Eksik değerleri sütunların ortalamasıyla doldurun
+#print(df.isnull().sum())
+
+
+#df2 = planets.copy()
+#print(df2.isnull().sum())              #-> .copy() metotu kullandigimiz icin ayni veri setiyle baska islemler de yapabiliriz.
 
 
 
+  # Kategorik Degisken Ozetleri
+#import seaborn as sns
+#planets = sns.load_dataset("planets")
+#df = planets.copy()
+
+#kat_df = df.select_dtypes(include = ["object"])
+#print(kat_df.head())
+
+#print(kat_df.method.unique())                   #-> method isimli kategorik degiskenin siniflarina erisim saglar.
+#print(kat_df["method"].value_counts().count())  #-> method isimli kategorik degiskenin kac sinifi oldugunu gosterir.
+#print(kat_df["method"].value_counts())          #-> method isimli kategorik degiskenin sinif frekanslarine erisim.
+
+
+#import matplotlib.pyplot as plt
+#ax = df["method"].value_counts().plot.barh()    #-> plot.barh() metotu veri setini Grafik seklinde gorsellestirerek verir.
+#ax.set_title('Method Count')
+#plt.show()
 
 
 
+  # Surekli Degisken Ozetleri
+#import seaborn as sns
+#planets = sns.load_dataset("planets")
+#df = planets.copy()
+#print(df.head())
 
+#df_num = df.select_dtypes(include = ["float64", "int64"])       #-> Surekli degisken secme islemi.
+#print(df_num.head())
+#print(df_num.describe().T)
+#print(df_num["distance"].describe())
+
+
+"""
+import seaborn as sns
+planets = sns.load_dataset("planets")
+df = planets.copy()
+df_num = df.select_dtypes(include = ["float64", "int64"])       #-> Surekli degisken secme islemi.
+print("Ortalama: " + str(df_num["distance"].mean()))
+print("Dolu Gozlem Sayisi: " + str(df_num["distance"].count()))
+print("Maksimum Deger: " + str(df_num["distance"].max()))
+print("Minimum Deger: " + str(df_num["distance"].min()))
+print("Medyan: " + str(df_num["distance"].median()))
+print("Standart Sapma: " + str(df_num["distance"].std()))
+"""
