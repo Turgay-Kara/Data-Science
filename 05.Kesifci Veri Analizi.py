@@ -93,6 +93,7 @@ import seaborn as sns
 planets = sns.load_dataset("planets")
 df = planets.copy()
 df_num = df.select_dtypes(include = ["float64", "int64"])       #-> Surekli degisken secme islemi.
+
 print("Ortalama: " + str(df_num["distance"].mean()))
 print("Dolu Gozlem Sayisi: " + str(df_num["distance"].count()))
 print("Maksimum Deger: " + str(df_num["distance"].max()))
