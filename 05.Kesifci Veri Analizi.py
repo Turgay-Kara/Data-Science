@@ -47,7 +47,7 @@ pd.set_option('display.expand_frame_repr', False)
 #df["mass"] = df["mass"].fillna(df.mass.mean())                         #-> NaN degerleri 0 olarak degistirmek yerine Ortalamalarini yazdik.
 
 #numeric_cols = df.select_dtypes(include='number')                      #-> Yalnizca sayisal sutunlari secin.
-#df[numeric_cols.columns] = numeric_cols.fillna(numeric_cols.mean())    #-> Tum veri setindeki Eksik değerleri sütunların ortalamasıyla doldurun
+#df[numeric_cols.columns] = numeric_cols.fillna(numeric_cols.mean())    #-> Tum veri setindeki Eksik degerleri sutunlarin ortalamasiyla doldurun
 #print(df.isnull().sum())
 
 
@@ -100,4 +100,137 @@ print("Maksimum Deger: " + str(df_num["distance"].max()))
 print("Minimum Deger: " + str(df_num["distance"].min()))
 print("Medyan: " + str(df_num["distance"].median()))
 print("Standart Sapma: " + str(df_num["distance"].std()))
+"""
+
+
+  # Barplot
+#import seaborn as sns
+#diamonds = sns.load_dataset("diamonds")
+#df = diamonds.copy()
+#print(df.head())
+#print(df.describe().T)
+
+#print(df["price"].mean())
+#print(df["color"].value_counts())
+#print(df["cut"].head())
+
+
+#ordinal tanimlama
+#import pandas as pd
+#from pandas.api.types import CategoricalDtype
+#df.cut = df.cut.astype(CategoricalDtype(ordered = True))    #-> cut'in type'ini Kategorik Degiskene donustur.
+#print(df.cut.dtypes)                                        #-> cut = category
+#print(df.cut.head(1))                                       #-> ['Ideal' < 'Premium' < 'Very Good' < 'Good' < 'Fair'] >> Siralama islemimiz bozuldu. >> (1)
+
+
+#cut_categories = ["Fair","Good","Very Good","Premium","Ideal"]  # >> (2)
+#df.cut = df.cut.astype(CategoricalDtype(categories = cut_categories, ordered = True)) # (3) >> sorunu cozduk.
+#print(df.cut.head(1))
+
+
+  # Pandas ile Sutun Grafigi olusturma
+"""
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+from pandas.api.types import CategoricalDtype
+
+diamonds = sns.load_dataset("diamonds")
+df = diamonds.copy()
+df.cut = df.cut.astype(CategoricalDtype(ordered = True))
+cut_categories = ["Fair","Good","Very Good","Premium","Ideal"]
+df.cut = df.cut.astype(CategoricalDtype(categories = cut_categories, ordered = True))
+
+(df["cut"]
+ .value_counts()
+ .plot.barh()
+ .set_title("Cut Degiskenlerinin Sinif Frekanslari"));
+print(plt.show())
+"""
+
+
+
+  # Sutun Grafik Ornegi:
+"""
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Veriyi olustur
+data = {
+    "deger": ["Fair","Good","Very Good","Premium","Ideal"],
+    "ucret(₺)": [500, 900, 1500, 3000, 6000]
+}
+
+# 2. DataFrame'e donustur
+df = pd.DataFrame(data)
+
+# 3. Sutun grafigi olustur
+df.plot(kind='bar', x='deger', y='ucret(₺)', color='skyblue')
+
+# Grafigi guzellestirme
+plt.title("Diamond Prices")
+plt.xlabel("Zaman")
+plt.ylabel("Fiyat")
+plt.xticks(rotation=0)  # X eksenindeki seanslarinn dikey yazilmasini engeller
+plt.tight_layout()  # Grafigi duzgun yerlestirir
+
+# 4. Grafigi goster
+plt.show()
+"""
+
+
+
+  # Seaborn ile Sutun Grafigi olusturma
+""" 
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pandas.api.types import CategoricalDtype
+
+diamonds = sns.load_dataset("diamonds")
+df = diamonds.copy()
+df.cut = df.cut.astype(CategoricalDtype(ordered = True))
+cut_categories = ["Fair","Good","Very Good","Premium","Ideal"]
+df['cut'] = df['cut'].astype(CategoricalDtype(categories=cut_categories, ordered=True))
+
+sns.countplot(x="cut", data=df, palette="muted")
+plt.title("Cut Categories Count")
+plt.show()
+"""
+
+
+
+  # Caprazlama
+"""
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pandas.api.types import CategoricalDtype
+
+diamonds = sns.load_dataset("diamonds")
+df = diamonds.copy()
+df.cut = df.cut.astype(CategoricalDtype(ordered = True))
+cut_categories = ["Fair","Good","Very Good","Premium","Ideal"]
+df['cut'] = df['cut'].astype(CategoricalDtype(categories=cut_categories, ordered=True))
+
+sns.catplot(x= "cut", y= "price", data = df, kind="strip", palette="viridis")
+plt.title("Cut Types vs Price")
+plt.show()
+"""
+
+
+
+  # Daha Derinlere in:
+"""
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pandas.api.types import CategoricalDtype
+
+diamonds = sns.load_dataset("diamonds")
+df = diamonds.copy()
+df.cut = df.cut.astype(CategoricalDtype(ordered = True))
+cut_categories = ["Fair","Good","Very Good","Premium","Ideal"]
+df['cut'] = df['cut'].astype(CategoricalDtype(categories=cut_categories, ordered=True))
+sns.barplot(x="cut", y="price", hue="color", data=df, palette="Set2") 
+plt.show()
+
+print(df.groupby(["cut", "color"], observed= False)["price"].mean())  #-> Gruplayarak Grafiksiz bir sekilde gosterecektir.
 """
