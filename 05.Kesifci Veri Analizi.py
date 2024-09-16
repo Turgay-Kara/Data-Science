@@ -234,3 +234,56 @@ plt.show()
 
 print(df.groupby(["cut", "color"], observed= False)["price"].mean())  #-> Gruplayarak Grafiksiz bir sekilde gosterecektir.
 """
+
+
+
+# Histogram ve Yogunluk Grafigi
+#import matplotlib.pyplot as plt
+#import seaborn as sns
+#diamodns = sns.load_dataset("diamonds")
+#df = diamodns.copy()
+#print(df.head())
+
+#sns.displot(df.price, bins = 25, kde = False)   #-> Bins degeri arttiginda daha cok sutun olur yani daha detayli bir sunum verir.
+#plt.show()
+
+#sns.displot(df.price, kde = True)               #-> kde = True komutu ile ayni zamanda yogunluk grafigini de gosterebiliyoruz.
+#plt.show()
+
+#sns.histplot(df.price)                          #-> Sadece histogrami gosterir
+#plt.show()       
+
+#sns.kdeplot(df.price, fill=True)               #-> Sadece yogunluk grafigini gosterir.
+#plt.show()
+
+
+
+  # Histogram ve Yogunluk Caprazlamalari
+"""  
+import matplotlib.pyplot as plt
+import seaborn as sns
+diamodns = sns.load_dataset("diamonds")
+df = diamodns.copy()
+
+print(df.head())
+
+(sns.FacetGrid(df,
+               hue = "cut",
+               height = 5,
+               xlim = (0,10000))
+.map(sns.kdeplot, "price", fill = True)
+.add_legend()
+)
+plt.show()
+"""
+
+
+
+"""
+import matplotlib.pyplot as plt
+import seaborn as sns
+diamodns = sns.load_dataset("diamonds")
+df = diamodns.copy()
+sns.catplot(x = "cut", y = "price", hue = "color", kind = "point", data = df)
+plt.show()
+"""
