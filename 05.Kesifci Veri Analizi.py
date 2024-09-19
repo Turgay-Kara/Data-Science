@@ -287,3 +287,89 @@ df = diamodns.copy()
 sns.catplot(x = "cut", y = "price", hue = "color", kind = "point", data = df)
 plt.show()
 """
+
+
+
+  # Boxplot
+# total_bill = yemegin toplam fiyati (bahsis ve vergi dahil)
+# tip = bahsis
+# sex = ucreti odeyen kisinin cinsiyeti (0:male, 1:female)
+# smoker = grupta sigara icen var mi? (0:No, 1:Yes)
+# day = gun (3:Thur, 4:Fri, 5:Sat)
+# time = ne zaman? (0:Day, 1:Night)
+# size = Grupta kac kisi var? 
+
+
+
+"""
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+tips = sns.load_dataset("tips")
+df = tips.copy()
+#print(df.head())
+#print(df.describe().T)
+
+print(df["sex"].value_counts())
+print(df["smoker"].value_counts())
+print(df["day"].value_counts())
+print(df["time"].value_counts())
+
+sns.boxplot(x=df["total_bill"])   # Sutun Grafigi
+plt.show()
+"""
+
+
+  # Caprazlamalar
+#sns.boxplot(x = "day", y = "total_bill", data = df)   #-> x ekseninde gunleri, y ekseninde geliri goster.
+#plt.show()                                            #-> En cok Gelir Pazar Gunu
+
+#sns.boxplot(x = "time", y = "total_bill", data = df)  #-> Aksam Yemeginde Daha fazla gelir elde ediyor.
+#plt.show()
+
+#sns.boxplot(x = "size", y = "total_bill", data = df)
+#plt.show()
+
+#sns.boxplot(x = "day", y = "total_bill", hue = "sex", data = df)
+#plt.show()
+
+
+
+  # Violin Grafik -> Kutu & Yoğunluk Grafigi
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+tips = sns.load_dataset("tips")
+df = tips.copy()
+#print(df.head())
+
+#sns.catplot(y = "total_bill", kind = "violin", data = df)
+#plt.show()
+
+  # Caprazlamalar
+#sns.catplot(x = "day", y = "total_bill", hue = "sex", kind = "violin", palette = "Set2", data = df)
+#plt.show()
+
+  # Korelasyon Caprazlamalari
+# Scatterplot
+
+#sns.scatterplot(x = "total_bill", y = "tip", data = df)   # Harcanilan para arttikca Bagis artiyor.
+#plt.show()
+
+#sns.scatterplot(x = "total_bill", y = "tip", style = "day", hue = "day", data = df)   # Veri Grafigindeki sembol degisikligi
+#plt.show()
+
+#sns.scatterplot(x = "total_bill", y = "tip", hue = "size", size = "size" , data = df)  # hue ile renklendirdik, size ile boyut ayarladik
+#plt.show()
+
+
+
+  # Dogrusal iliskinin Gosterilmesi
+#sns.lmplot(x = "total_bill", y = "tip", hue = "smoker",  data = df)
+#plt.show()
+
+#sns.lmplot(x = "total_bill", y = "tip", hue = "smoker", col = "time",  data = df)
+#plt.show()
+
+#sns.lmplot(x = "total_bill", y = "tip", hue = "smoker", col = "time", row = "sex", data = df) # Satirlara gore Cinsiyet, Sutunlara gore Time
+#plt.show()
