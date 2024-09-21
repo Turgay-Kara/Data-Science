@@ -334,13 +334,12 @@ plt.show()
 #plt.show()
 
 
-
   # Violin Grafik -> Kutu & Yoğunluk Grafigi
-import seaborn as sns
-import matplotlib.pyplot as plt
+#import seaborn as sns
+#import matplotlib.pyplot as plt
 
-tips = sns.load_dataset("tips")
-df = tips.copy()
+#tips = sns.load_dataset("tips")
+#df = tips.copy()
 #print(df.head())
 
 #sns.catplot(y = "total_bill", kind = "violin", data = df)
@@ -363,7 +362,6 @@ df = tips.copy()
 #plt.show()
 
 
-
   # Dogrusal iliskinin Gosterilmesi
 #sns.lmplot(x = "total_bill", y = "tip", hue = "smoker",  data = df)
 #plt.show()
@@ -372,4 +370,39 @@ df = tips.copy()
 #plt.show()
 
 #sns.lmplot(x = "total_bill", y = "tip", hue = "smoker", col = "time", row = "sex", data = df) # Satirlara gore Cinsiyet, Sutunlara gore Time
+#plt.show()
+
+
+  # Scatterplot Matrisi
+#import seaborn as sns
+#import matplotlib.pyplot as plt
+#iris = sns.load_dataset("iris") # Cicek Turleri
+#df = iris.copy()
+#print(iris.head())
+#print(df.shape)
+
+#sns.pairplot(df, hue = "species", markers= ["o", "s", "D"])
+#plt.show()
+
+#sns.pairplot(df, hue = "species", kind = "reg")
+#plt.show()
+
+
+
+  # Heatmap (isi haritasi)
+#import seaborn as sns
+#import matplotlib.pyplot as plt
+#flight = sns.load_dataset("flights")
+#df = flight.copy()
+#print(df.head())
+#print(df.shape)
+#print(df["passengers"].describe())
+
+#df = df.pivot(index="month", columns="year", values="passengers")
+#sns.heatmap(df)   # Ucus sayilarini yila ve aylara oranla nasil arttigini gozlemledik.
+#plt.show()
+
+# Daha detayli:
+#df = df.pivot(index = "month", columns= "year", values = "passengers")
+#sns.heatmap(df, annot=True, fmt="d", linewidths= 0.5)     # cbar = False ile yandaki bar'i kaldirabiliriz.
 #plt.show()
