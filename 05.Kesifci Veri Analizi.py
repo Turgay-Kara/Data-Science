@@ -406,3 +406,61 @@ plt.show()
 #df = df.pivot(index = "month", columns= "year", values = "passengers")
 #sns.heatmap(df, annot=True, fmt="d", linewidths= 0.5)     # cbar = False ile yandaki bar'i kaldirabiliriz.
 #plt.show()
+
+
+
+# Cizgi Grafik
+#import seaborn as sns
+#import matplotlib.pyplot as plt
+#fmri = sns.load_dataset("fmri")
+#df = fmri.copy()
+#print(df.head())
+#print(df.shape)
+
+#print(df["timepoint"].describe())
+#print(df["signal"].describe())
+
+#print(df.groupby("timepoint")["signal"].count())
+#print(df.groupby("timepoint")["signal"].describe())
+
+
+  # Cizgi Grafigi ve Caprazlamalar
+#sns.lineplot(x = "timepoint", y = "signal", data = df)  # her bir timepointin ortalamasini alarak cizgi grafigi olusturacak.
+#plt.show()
+
+#sns.lineplot(x = "timepoint", y = "signal", hue= "event", style= "event", data = df)  # hue argumani 3. bir boyut ekler. style="event" argumani eventin stilini degistirir.
+#plt.show()
+
+"""
+sns.lineplot(x = "timepoint", 
+             y = "signal", 
+             hue= "event", 
+             style= "event", 
+             markers=True,
+             dashes=False,
+             data = df)
+plt.show()
+"""
+
+"""
+sns.lineplot(x = "timepoint", 
+             y = "signal", 
+             hue= "region", 
+             style= "event",
+             data = df)  # hue argumani 3. bir boyut ekler. style="event" argumani eventin stilini degistirir.
+plt.show()
+"""
+
+
+
+  # Basit Zaman Serisi Grafigi
+""" 
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+df = yf.download("AAPL", start="2019-09-21", end="2024-09-21")    # start end araligindaki apple hisse senetlerinini verilerini cek.
+print(df.head())
+kapanis = df["Close"]
+kapanis.plot()
+plt.show()
+"""
