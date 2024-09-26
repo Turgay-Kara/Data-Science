@@ -78,6 +78,86 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
  # Guven Araligi
+# Ana Kutle parametresinin tahmini degerini kapsayacak 2 sayidan olusan bir aralik.
+# Yapilan tahminler ne kadar Guvenilir?
+
+
+ # Guven Araligi Hesaplama: (guven.aralik.hesaplama.jpg)
+
+
+ # Fiyat Stratejisi Karar Destek
+#import numpy as np
+#fiyatlar = np.random.randint(10,110, 1000)
+#print(fiyatlar.mean())
+
+#import statsmodels.stats.api as sms
+#print(sms.DescrStatsW(fiyatlar).tconfint_mean())        #-> Guven Araligimiz (58,4 - 61.95) %95 Guvenilirlik ile 
+
+
+
+ # Olasilik
+# Kesikli Olasilik Dagilimlari: (0 veya 1)
+# Bernoulli:    Basarili-Basarisiz seklinde 2 sonuclu olaylarda kullanilan Kesikli Olasilik Dagilimidir. (0 veya 1)
+# Binom:        Bagimsiz n deneme sonucu k basarili olma olasiligi ile ilgili Kullanilan Dagilimdir.
+# Poisson:      Belirli bir zaman araliginda belirli bir alanda nadiren rastlanan olaylarin olasiliklarini hesaplamak icin Kullanilir. (rotara dusen ucak sefer sayisi gibi...)
+
+
+# Surekli Olasilik Dagilimlari: (0.1, 0.2, ...)
+# Normal Dagilim:       Normal dagildigi bilinen surekli Rassal Degiskenlerin olasilik hesaplamasini yapmak icin Kullanilir.
+# Uniform Dagilim:      
+# Ustel Dagilim:        
+
+
+
+# Bernoulli Uygulama
+#from scipy.stats import bernoulli
+#p = 0.6         # tura gelme olasiligi 0.6 dedik.
+#rv = bernoulli(p)
+#print(rv.pmf(k = 1))    # 0.6, k=0 iken yazi gelme olasiligi: 0.4
+
+
+
+ # Buyuk Sayilar Yasasi
+"""
+import numpy as np
+rng = np.random.RandomState(123)
+for i in np.arange(1,21):
+    deney_sayisi = 2**i
+    yazi_turalar = rng.randint(0,2, size = deney_sayisi)
+    yazi_olasiliklari = yazi_turalar.mean()
+    print("Atis Sayisi:", deney_sayisi, "--", "Yazi Olasiligi:","%","%.2f" % (yazi_olasiliklari*100))
+"""
+
+
+
+ # Binom Uygulama
+#from scipy.stats import binom
+#p = 0.01
+#n = 100
+#rv = binom(n, p)
+#print(rv.pmf(1))    #-> Verilen bir Reklami goren 100 kisiden 1 kisinin aksiyon alma ihtimali.
+#print(rv.pmf(5))
+#print(rv.pmf(10))
+
+
+
+ # Poisson Uygulama
+#from scipy.stats import poisson
+#lambda_ = 0.1       #-> Olaylarin ortalama gerceklesme orani
+#rv = poisson(mu = lambda_)
+#print(rv.pmf(k = 0))
+#print(rv.pmf(k = 3))
+#print(rv.pmf(k = 5))
+
+
+
+ # Normal Dagilim Uygulama
+#from scipy.stats import norm
+#print(1-norm.cdf(90, 80, 5))                       #-> .cdf(hesaplanmak istenen deger, ortalama, standar sapma) #(90dan fazla olma olasiligi-> 0.022...)
+#print(1-norm.cdf(70, 80, 5))
+#print(norm.cdf(73, 80, 5))                         #-> 73'ten az olma olasiligi.
+#print(norm.cdf(90, 80, 5) - norm.cdf(85, 80, 5))   #-> 85 ile 90 arasinda olma olasiligi.
+
 
 
 
