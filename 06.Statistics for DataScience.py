@@ -160,6 +160,7 @@ for i in np.arange(1,21):
 
 
 
+ # Hipotez Testi: Bir tahmini test etmek icin kullanilan istatiksel bir tekniktir.
 
 
 
