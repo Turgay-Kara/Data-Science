@@ -3,11 +3,11 @@
 """
 
 # Orneklem: 
-# Bir topluluğun (evrenin) tamamini temsil eden, ondan seçilen daha kuçuk bir gruptur.
+# Bir toplulugun (evrenin) tamamini temsil eden, ondan seçilen daha kuçuk bir gruptur.
 
 # Merkezi Limit Teoremi: 
-# yeterince buyuk bir orneklem alindiğinda, orneklem ortalamalarinin dağiliminin, 
-# orneklem alinan dağilimin sekli ne olursa olsun, yaklasik olarak normal dağilima yaklasacağini ifade eder. 
+# yeterince buyuk bir orneklem alindiginda, orneklem ortalamalarinin dagiliminin, 
+# orneklem alinan dagilimin sekli ne olursa olsun, yaklasik olarak normal dagilima yaklasacagini ifade eder. 
 
 
 
@@ -29,25 +29,25 @@
  # Betimsel Istatistikler
 
 # Varyans:
-# Bir veri setindeki değerlerin ortalamaya göre ne kadar dağıldığını ölçer.
-# Dağılım ne kadar büyükse varyans da o kadar büyük olur.
+# Bir veri setindeki degerlerin ortalamaya gore ne kadar dagildigini olçer.
+# Dagilim ne kadar buyukse varyans da o kadar buyuk olur.
 
 
 # Kovaryans:
-# iki değişkenin birlikte nasıl hareket ettiğini gösterir.
-# Eğer iki değişken aynı yönde hareket ediyorsa pozitif kovaryans, ters yönde hareket ediyorsa negatif kovaryans vardır.
+# iki degiskenin birlikte nasil hareket ettigini gosterir.
+# Eger iki degisken ayni yonde hareket ediyorsa pozitif kovaryans, ters yonde hareket ediyorsa negatif kovaryans vardir.
 
 
-# Korelasyon, iki değişken arasındaki ilişkinin yönünü ve gücünü gösteren bir ölçüdür. Iki değişkenin birlikte nasıl değiştiğini anlamak için kullanılır.
+# Korelasyon, iki degisken arasindaki iliskinin yonunu ve gucunu gosteren bir olçudur. Iki degiskenin birlikte nasil degistigini anlamak için kullanilir.
 
-# Pozitif korelasyon: Bir değişken artarken diğeri de artar.
-# Negatif korelasyon: Bir değişken artarken diğeri azalır.
-# 0'a yakın korelasyon: İki değişken arasında belirgin bir ilişki yoktur.
+# Pozitif korelasyon: Bir degisken artarken digeri de artar.
+# Negatif korelasyon: Bir degisken artarken digeri azalir.
+# 0'a yakin korelasyon: İki degisken arasinda belirgin bir iliski yoktur.
 
-# Korelasyon katsayısı, genellikle -1 ile +1 arasında bir değer alır:
-# +1: Tam pozitif ilişki,
-# -1: Tam negatif ilişki,
-# 0: Hiçbir ilişki yok.
+# Korelasyon katsayisi, genellikle -1 ile +1 arasinda bir deger alir:
+# +1: Tam pozitif iliski,
+# -1: Tam negatif iliski,
+# 0: Hiçbir iliski yok.
 
 
 
@@ -73,7 +73,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 #print(df[["tip", "total_bill"]].cov())         # 2 Degisken arasindaki degisimi ifade eden bir istatistik.
 
 # Korelasyon
-#print(df[["tip", "total_bill"]].corr())        # 2 değişken arasındaki ilişkiyi gösterir.
+#print(df[["tip", "total_bill"]].corr())        # 2 degisken arasindaki iliskiyi gosterir.
 
 
 
@@ -159,8 +159,44 @@ for i in np.arange(1,21):
 #print(norm.cdf(90, 80, 5) - norm.cdf(85, 80, 5))   #-> 85 ile 90 arasinda olma olasiligi.
 
 
-
  # Hipotez Testi: Bir tahmini test etmek icin kullanilan istatiksel bir tekniktir.
+
+
+ # p-Value
+# p < 0.05  ise  h0 hipotezi Reddedildi.
+
+"""
+İstatistikte iki temel hipotez vardir:
+
+Sifir Hipotezi (H₀): Arastirmada iddia edilen durumun olmadigini savunan varsayimdir. 
+Genellikle, "degisiklik yok", "etki yok" veya "fark yok" anlamina gelir.
+ornegin, bir ilaç çalismasinda sifir hipotezi, ilacin etkisiz oldugunu savunabilir.
+
+
+Alternatif Hipotez (H₁): Sifir hipotezine karsi ileri surulen varsayimdir.
+Bu, "degisiklik var", "etki var" veya "fark var" gibi sonuçlari savunur.
+Yani, arastirmanin asil iddiasini test etmek için bu hipotez kullanilir.
+
+
+Bir hipotezin dogrulugu test edilirken, sifir hipotezi baslangiçta dogru kabul edilir ve analizler bu varsayimi sinamak için yapilir.
+Verilere dayali sonuçlara gore sifir hipotezi reddedilebilir veya kabul edilebilir.
+"""
+
+
+ # Hipoez Testi Adimlari
+# Adim 1: Hipotezlerin kurulmasi ve yonlerinin belirlenmesi.
+# Adim 2: Anlamlilik duzeyinin ve tablo degerinin belirlenmesi.
+# Adim 3: Test istatistiginin belirlenmesi ve hesaplanmasi.
+# Adim 4: Hesaplanan Test istatistigi ile Alfa'ya karsilik gelen tablo degerinin karsilastirilmasi.
+# Adim 5: Yorum
+
+# Test istatistigi (Zh) > Tablo Degeri (Zt) ise H0 Red
+
+
+
+
+
+# temel konuları iyi calis ve adim adim calismaya devam et!
 
 
 
