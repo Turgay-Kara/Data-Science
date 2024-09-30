@@ -191,14 +191,3 @@ Verilere dayali sonuçlara gore sifir hipotezi reddedilebilir veya kabul edilebi
 # Adim 5: Yorum
 
 # Test istatistigi (Zh) > Tablo Degeri (Zt) ise H0 Red
-
-
-
-
-
-# temel konuları iyi calis ve adim adim calismaya devam et!
-
-
-
-
-
