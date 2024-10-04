@@ -1,9 +1,28 @@
+# _________________________________FEYNMAN TEKNIGI_________________________________ #
+"""
+ 1-Kavrami Sec: Ogrenmek istedigin bir konu ya da kavrami belirle.
+ 
+ 2-Basit Dilde Acikla: Konuyu sanki hic bilmeyen birine acikliyormus gibi, 
+ basit terimlerle yaz veya anlat. Teknik jargonlardan kacin.
+ 
+ 3-Eksikleri Belirle: Aciklarken zorlandigin ya da tam olarak anlamadigin yerleri fark et. 
+ Bu eksik olan kisimlari yeniden gozden gecir ve ogrenmeye devam et.
+
+ 4-Yeniden Duzenle ve Anlat: Eksiklerini tamamladiktan sonra konuyu daha anlasilir 
+ bir sekilde yeniden yaz veya anlat. Gerekirse orneklerle destekle.
+
+ 5-Basitlestir: Eger hala karmasik yerler varsa, konuyu daha da basitlestirerek anlatmaya calis. 
+ iyice sadelestikce, konuyu derinlemesine anladigini fark edeceksin.
+"""
+# __________________________________________________________________________________ #
+
+
 """
         STATISTICS for DATA SCIENCE
 """
 
 # Orneklem: 
-# Bir toplulugun (evrenin) tamamini temsil eden, ondan seçilen daha kuçuk bir gruptur.
+# Bir toplulugun (evrenin) tamamini temsil eden, ondan secilen daha kucuk bir gruptur.
 
 # Merkezi Limit Teoremi: 
 # yeterince buyuk bir orneklem alindiginda, orneklem ortalamalarinin dagiliminin, 
@@ -29,7 +48,7 @@
  # Betimsel Istatistikler
 
 # Varyans:
-# Bir veri setindeki degerlerin ortalamaya gore ne kadar dagildigini olçer.
+# Bir veri setindeki degerlerin ortalamaya gore ne kadar dagildigini olcer.
 # Dagilim ne kadar buyukse varyans da o kadar buyuk olur.
 
 
@@ -38,7 +57,7 @@
 # Eger iki degisken ayni yonde hareket ediyorsa pozitif kovaryans, ters yonde hareket ediyorsa negatif kovaryans vardir.
 
 
-# Korelasyon, iki degisken arasindaki iliskinin yonunu ve gucunu gosteren bir olçudur. Iki degiskenin birlikte nasil degistigini anlamak için kullanilir.
+# Korelasyon, iki degisken arasindaki iliskinin yonunu ve gucunu gosteren bir olcudur. Iki degiskenin birlikte nasil degistigini anlamak icin kullanilir.
 
 # Pozitif korelasyon: Bir degisken artarken digeri de artar.
 # Negatif korelasyon: Bir degisken artarken digeri azalir.
@@ -47,7 +66,7 @@
 # Korelasyon katsayisi, genellikle -1 ile +1 arasinda bir deger alir:
 # +1: Tam pozitif iliski,
 # -1: Tam negatif iliski,
-# 0: Hiçbir iliski yok.
+# 0: Hicbir iliski yok.
 
 
 
@@ -170,16 +189,16 @@ for i in np.arange(1,21):
 
 Sifir Hipotezi (H₀): Arastirmada iddia edilen durumun olmadigini savunan varsayimdir. 
 Genellikle, "degisiklik yok", "etki yok" veya "fark yok" anlamina gelir.
-ornegin, bir ilaç çalismasinda sifir hipotezi, ilacin etkisiz oldugunu savunabilir.
+ornegin, bir ilac calismasinda sifir hipotezi, ilacin etkisiz oldugunu savunabilir.
 
 
 Alternatif Hipotez (H₁): Sifir hipotezine karsi ileri surulen varsayimdir.
-Bu, "degisiklik var", "etki var" veya "fark var" gibi sonuçlari savunur.
-Yani, arastirmanin asil iddiasini test etmek için bu hipotez kullanilir.
+Bu, "degisiklik var", "etki var" veya "fark var" gibi sonuclari savunur.
+Yani, arastirmanin asil iddiasini test etmek icin bu hipotez kullanilir.
 
 
-Bir hipotezin dogrulugu test edilirken, sifir hipotezi baslangiçta dogru kabul edilir ve analizler bu varsayimi sinamak için yapilir.
-Verilere dayali sonuçlara gore sifir hipotezi reddedilebilir veya kabul edilebilir.
+Bir hipotezin dogrulugu test edilirken, sifir hipotezi baslangicta dogru kabul edilir ve analizler bu varsayimi sinamak icin yapilir.
+Verilere dayali sonuclara gore sifir hipotezi reddedilebilir veya kabul edilebilir.
 """
 
 
