@@ -1,6 +1,27 @@
+# _________________________________FEYNMAN TEKNIGI_________________________________ #
+
+"""
+ 1-Kavrami Sec: Ogrenmek istedigin bir konu ya da kavrami belirle.
+ 
+ 2-Basit Dilde Acikla: Konuyu sanki hic bilmeyen birine acikliyormus gibi, 
+ basit terimlerle yaz veya anlat. Teknik jargonlardan kacin.
+ 
+ 3-Eksikleri Belirle: Aciklarken zorlandigin ya da tam olarak anlamadigin yerleri fark et. 
+ Bu eksik olan kisimlari yeniden gozden gecir ve ogrenmeye devam et.
+
+ 4-Yeniden Duzenle ve Anlat: Eksiklerini tamamladiktan sonra konuyu daha anlasilir 
+ bir sekilde yeniden yaz veya anlat. Gerekirse orneklerle destekle.
+
+ 5-Basitlestir: Eger hala karmasik yerler varsa, konuyu daha da basitlestirerek anlatmaya calis. 
+ iyice sadelestikce, konuyu derinlemesine anladigini fark edeceksin.
+"""
+# __________________________________________________________________________________ #
+
+
 """
         #MOTIVATION
-"""  
+"""
+
 
 #   Arac Satis
 #   Aksiyon-1: Satis olmayan zamanlarda indirim yap.
