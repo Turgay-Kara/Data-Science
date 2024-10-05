@@ -260,3 +260,101 @@ Verilere dayali sonuclara gore sifir hipotezi reddedilebilir veya kabul edilebil
 
 # Tek Orneklem Oran Testi: Oransal bir ifade test edilmek istenildiginde kullanilir.
 # Toplamis olunan orneklem > 30 ise bu testi gerceklestirebiliriz.
+
+
+
+# Donusum Orani Testi (detayli anlatim)
+# > Ornegin bir reklami goren 100 kisiden 1'i donus yapiyorsa Donusum Orani: 0.01'dir. <
+
+"""
+ Problem: Verilen bir reklamda Donusum orani "yazilim" ile 0.125 donusum orani elde edilmistir.
+ Fakat bu oran gelirlerle ortusmuyor.
+
+ Detaylar: 500 kisi reklamlara tiklamis, 40 atnesi sitemize gelip alisveris yapmis.
+ Ornek uzerinden elde edilen donusum orani: 0.08
+"""
+
+# H₀: P = 0.125
+# H₁: P ≠ 0.125
+
+#from statsmodels.stats.proportion import proportions_ztest
+#count = 40      # tiklanma sayisi
+#nobs = 500      # gozlem sayisi
+#value = 0.125   # karsilastirilmak istenen oran
+
+#print(proportions_ztest(count,nobs,value))  #-> -3.7090151628513017, 0.0002080669689845979)
+                                                    # test ist.            p-value
+# P-value < 0.05 oldugundan dolayi H₀ Reddediir.
+
+
+
+# Bagimsiz iki Orneklem T Testi (AB Testi) (detayli anlatim)
+# > iki grup ortalamasi arasinda karsilastirma yapmak amaciyla kullanilir. <
+
+"""
+ Problem: ML Modelinin Basari Testi:
+ Bir ML Projesinin Urettigi tahminler neticesinde olusan gelir ile eski sistemin urettigi
+ gelirler karsilastirilip anlamli bir farklilik olup olmadigi test edilmek isteniyor.
+
+ Detaylar:
+ Model Gelistirilmis ve Web sitesine entegre edilmis.
+ Site Kullanicilari belirli bir kurala gore 2ye bolunmus olsun
+ A grubu eski, B grubu yeni sisteme gore analiz edilecek.
+ Gelir anlaminda anlamli bir is yapilip yapilmadigi test edilmek isteniyor.
+"""
+
+# veri setinin duzenlenmesi (en zor sekli ile)
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+A = pd.DataFrame([30,27,21,27,29,30,20,20,27,32,35,22,24,
+                  23,27,23,27,23,25,21,18,24,26,27,28,19,25])
+
+B = pd.DataFrame([37,39,31,31,34,38,30,36,29,28,38,28,37,
+                  37,30,32,31,31,27,32,33,33,33,31,32,33,26])
+
+"""
+# Grup A
+grup_a = np.arange(len(A)).astype(str)  # A icerisindeki eleman sayisi kadarlik bir grup olustur.
+grup_a = pd.DataFrame(grup_a)           # Bunu DataFrame'e donustur.
+grup_a[:] = "A"                         # Grup icerisindeki tum elemanlari "A" yap.
+A = pd.concat([A, grup_a], axis = 1)    # A'yi ve Grubu Yanyana Getir.
+
+# Grup B
+grup_b = np.arange(len(B)).astype(str)
+grup_b = pd.DataFrame(grup_b)
+grup_b[:] = "B"
+B = pd.concat([B, grup_b], axis = 1)
+
+# Tum Veri
+AB = pd.concat([A,B])
+AB.columns = ["Gelir", "Grup"]
+
+print(AB.head())
+print(AB.tail())
+
+# Gorsellestirme
+sns.boxplot(x = "Grup", y = "Gelir", data = AB)
+plt.show()
+"""
+
+# Verilerin rastgele mi yoksa doğru olduğu için mi elde edildiğini anlamak için varsayım kontrolü yapacağız.
+
+
+ # Varsayim Kontrolu
+# normallik varsayimi:
+#from scipy.stats import shapiro
+A_B = pd.concat([A,B], axis = 1)
+A_B.columns = ["A", "B"]
+#print(shapiro(A_B.A))       # p-value = 0.7849036492977337 (H₀ Kabul edilir!)
+#print(shapiro(A_B.B))       # p-value = 0.2762148565263921 (H₀ Kabul edilir!)
+
+
+# varyans homojenligi varsayimi
+# H₀: Varyanslar Homojendir.
+# H₁: Varyanslar Homojen Degildir.
+
+import scipy.stats as stats
+print(stats.levene(A_B.A, A_B.B))   # p-value = 0.4089042823104799 -> (H₀ Kabul edilir!) (Varyanslar Homojendir.)
