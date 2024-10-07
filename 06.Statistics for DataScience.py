@@ -357,4 +357,12 @@ A_B.columns = ["A", "B"]
 # H₁: Varyanslar Homojen Degildir.
 
 import scipy.stats as stats
-print(stats.levene(A_B.A, A_B.B))   # p-value = 0.4089042823104799 -> (H₀ Kabul edilir!) (Varyanslar Homojendir.)
+#print(stats.levene(A_B.A, A_B.B))   # p-value = 0.4089042823104799 -> (H₀ Kabul edilir!) (Varyanslar Homojendir.)
+
+
+
+ # T Test Uygulamasi
+test_istatistigi, pvalue = stats.ttest_ind(A_B["A"], A_B["B"], equal_var = True)   #-> equal_var = True (varyans homojenligi saglaniyor mu?)
+print(pvalue)   # p-value = 5.3036326801800985e-09 > 0.05 oldugu icin H₀ Hipotezi Reddediir.
+print("Test istatistigi = %.4f, p-value = %.4f" % (test_istatistigi, pvalue))
+
