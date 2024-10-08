@@ -193,8 +193,11 @@ Verilere dayali sonuclara gore sifir hipotezi reddedilebilir veya kabul edilebil
 # Test istatistigi (Zh) > Tablo Degeri (Zt) ise H0 Red
 
 
+"""
+IS UYGULAMASI
 
-# is uygulamasi: Sitede Gecirilen Surenin Testi
+"""
+# Sitede Gecirilen Surenin Testi
 #import numpy as np
 
 #olcumler = np.array([17, 160, 234, 149, 145, 107, 197, 75, 201, 225, 211, 119,
@@ -304,16 +307,16 @@ Verilere dayali sonuclara gore sifir hipotezi reddedilebilir veya kabul edilebil
 """
 
 # veri setinin duzenlenmesi (en zor sekli ile)
-import numpy as np
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+#import numpy as np
+#import pandas as pd
+#import seaborn as sns
+#import matplotlib.pyplot as plt
 
-A = pd.DataFrame([30,27,21,27,29,30,20,20,27,32,35,22,24,
-                  23,27,23,27,23,25,21,18,24,26,27,28,19,25])
+#A = pd.DataFrame([30,27,21,27,29,30,20,20,27,32,35,22,24,
+                  #23,27,23,27,23,25,21,18,24,26,27,28,19,25])
 
-B = pd.DataFrame([37,39,31,31,34,38,30,36,29,28,38,28,37,
-                  37,30,32,31,31,27,32,33,33,33,31,32,33,26])
+#B = pd.DataFrame([37,39,31,31,34,38,30,36,29,28,38,28,37,
+                  #37,30,32,31,31,27,32,33,33,33,31,32,33,26])
 
 """
 # Grup A
@@ -346,8 +349,8 @@ plt.show()
  # Varsayim Kontrolu
 # normallik varsayimi:
 #from scipy.stats import shapiro
-A_B = pd.concat([A,B], axis = 1)
-A_B.columns = ["A", "B"]
+#A_B = pd.concat([A,B], axis = 1)
+#A_B.columns = ["A", "B"]
 #print(shapiro(A_B.A))       # p-value = 0.7849036492977337 (H₀ Kabul edilir!)
 #print(shapiro(A_B.B))       # p-value = 0.2762148565263921 (H₀ Kabul edilir!)
 
@@ -356,13 +359,82 @@ A_B.columns = ["A", "B"]
 # H₀: Varyanslar Homojendir.
 # H₁: Varyanslar Homojen Degildir.
 
-import scipy.stats as stats
+#import scipy.stats as stats
 #print(stats.levene(A_B.A, A_B.B))   # p-value = 0.4089042823104799 -> (H₀ Kabul edilir!) (Varyanslar Homojendir.)
 
 
 
  # T Test Uygulamasi
-test_istatistigi, pvalue = stats.ttest_ind(A_B["A"], A_B["B"], equal_var = True)   #-> equal_var = True (varyans homojenligi saglaniyor mu?)
-print(pvalue)   # p-value = 5.3036326801800985e-09 > 0.05 oldugu icin H₀ Hipotezi Reddediir.
-print("Test istatistigi = %.4f, p-value = %.4f" % (test_istatistigi, pvalue))
+#test_istatistigi, pvalue = stats.ttest_ind(A_B["A"], A_B["B"], equal_var = True)   #-> equal_var = True (varyans homojenligi saglaniyor)
+#print(pvalue)   # p-value = 5.3036326801800985e-09 > 0.05 oldugu icin H₀ Hipotezi Reddediir.
+#print("Test istatistigi = %.4f, p-value = %.4f" % (test_istatistigi, pvalue))
 
+
+# Nonparametrik Bagimsiz iki Orneklem Testi
+#import scipy.stats as stats
+#print(stats.mannwhitneyu(A_B["A"], A_B["B"]))       # Hem Normallik varyansı hem de varyans homojenligi varsayimi Saglanmiyorsa Kullanilir.
+
+
+"""
+IS UYGULAMASI
+"""
+# Bagimli iki Orneklem T Testi
+# Bagimli iki grup ortalamasi arasinda karsilastirma yapilmak istenildiginde kullanilir.
+
+# Egitimden once ve sonra Sirket personellerinin performans olculerine iliskin degerler: 
+
+import pandas as pd
+import numpy as np
+
+np1 = np.random.randint(100,141, size=40)
+np2 = np.random.randint(120,161, size=40)
+
+before = pd.DataFrame(np1)
+after = pd.DataFrame(np2)
+
+mix = pd.concat([before, after], axis = 1)
+mix.columns = ["Before", "After"]
+#print(mix)
+
+
+
+# 1.Veri seti
+mix = pd.concat([before, after], axis = 1)
+mix.columns = ["BEFORE","AFTER"]
+#print("'mix' Veri Seti: \n\n ", mix.head(), "\n\n")
+
+
+# 2.Veri seti
+# Before Flag/Tag'ini olusturma
+group_before = np.arange(len(before))
+group_before = pd.DataFrame(group_before)
+group_before = group_before.astype(str)
+group_before[:] = "Before"
+
+# Flag ve Oncesi degerlerini bir araya getirme
+A = pd.concat([before, group_before], axis = 1)
+
+# After Flag/Tag'ini olusturma
+group_after = np.arange(len(after))
+group_after = pd.DataFrame(group_after)
+group_after = group_after.astype(str)
+group_after[:] = "After"
+
+# Flag ve Sonrasi degerlerini bir araya getirme
+B = pd.concat([after, group_after], axis = 1)
+
+# Tum veriyi bir araya getirme
+together = pd.concat([A,B])
+
+
+# isimlendirme
+together.columns = ["Performans","Before-After"]
+print("'Birlikte' Veri Seti: \n\n", together.head(), "\n")
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.boxplot(x = "Before-After", y = "Performans", data = together, palette = ["green", "orange"])
+plt.show()
+
+# After Performanslari gercekten de daha yuksek cikti. Ama,
+# bu degerlerin tesadufen olusmadigini ispatlamak icin Varsayim Kontrollerini yapacagiz.
