@@ -1,9 +1,8 @@
 import pandas as pd
-from scipy.stats import shapiro
+from scipy.stats import shapiro, levene, ttest_rel, wilcoxon
 import scipy.stats as stats
 
 # Eğitim öncesi ve sonrasi performans verileri (örnek)
-
 before = pd.DataFrame([123, 119, 119, 116, 123, 123, 121, 120, 117, 118, 121, 121, 123, 119,
                        121, 118, 124, 121, 125, 115, 115, 119, 118, 121, 117, 117, 120, 120,
                        121, 117, 118, 117, 123, 118, 124, 121, 115, 118, 125, 115], columns=['BEFORE'])
@@ -16,77 +15,59 @@ after = pd.DataFrame([118, 127, 122, 132, 129, 123, 129, 132, 128, 130, 128, 138
 mix = pd.concat([before, after], axis=1)
 
 # Shapiro-Wilk testinin uygulanmasi
-test_ist, pvalue = shapiro(mix.BEFORE)
-test_ist2, pvalue2 = shapiro(mix.AFTER)
+test_ist, pvalue_before = shapiro(mix.BEFORE)
+test_ist2, pvalue_after = shapiro(mix.AFTER)
 
 # Normal dağilim kontrolü
-if pvalue >= 0.05:
-    print("BEFORE grubunun normal dağilim varsayimi kabul edilmektedir (p-value: {:.3f}).".format(pvalue))
+print("Shapiro-Wilks Testi uygulaniyor...")
+if pvalue_before >= 0.05:
+    print("BEFORE grubu Normal Dagilmaktadir. (p-value: {:.3f})".format(pvalue_before))
 else:
-    print("BEFORE grubunun normal dağilim varsayimi reddedilmiştir (p-value: {:.3f}).".format(pvalue))
+    print("BEFORE grubu Normal Dagilmamaktadir. (p-value: {:.3f})".format(pvalue_before))
 
-if pvalue2 >= 0.05:
-    print("AFTER grubunun normal dağilim varsayimi kabul edilmektedir (p-value: {:.3f}).\n".format(pvalue2))
+if pvalue_after >= 0.05:
+    print("AFTER grubu Normal Dagilmaktadir. (p-value: {:.3f})".format(pvalue_after))
 else:
-    print("AFTER grubunun normal dağilim varsayimi reddedilmiştir (p-value: {:.3f}).\n".format(pvalue2))
+    print("AFTER grubu Normal Dagilmamaktadir. (p-value: {:.3f})".format(pvalue_after))
 
-# Devam eden test kodlari...
-
-
-# Levene Testi uygulanmasi
-if pvalue >= 0.05:
-    print("Normal dağilim varsayimi sağlandiği için Levene Testi uygulanacaktir...")
-    ttest_ist, ttest_pvalue = stats.levene(mix.BEFORE, mix.AFTER)
+# Parametrik veya nonparametrik testin seçimi
+if pvalue_before >= 0.05 and pvalue_after >= 0.05:
+    # Normal dağılım varsayımı sağlanıyorsa Levene testi
+    print("\nLevene Testi uygulanmasi...")
+    levene_stat, levene_pvalue = levene(mix.BEFORE, mix.AFTER)
     
-    if ttest_pvalue >= 0.05:
-        print("Levene Testi sonuçlarina göre varyanslar arasinda anlamli bir fark yoktur (p-value: {:.3f}).".format(ttest_pvalue))
-        print("Her iki grubun da normal dağilim varsayimini sağladiği için Shapiro-Wilk testi uygulanacaktir...\n")
+    if levene_pvalue >= 0.05:
+        # Varyanslar eşitse bağımlı T-Testi
+        print("Varyanslar eşit. T-Testi uygulaniyor...")
+        ttest_stat, ttest_pvalue = ttest_rel(mix.BEFORE, mix.AFTER)
         
-        test_ist3, pvalue3 = shapiro(mix.BEFORE)    
-        test_ist4, pvalue4 = shapiro(mix.AFTER)
-        
-        if pvalue3 >= 0.05:
-            print("BEFORE grubunun normal dağilim varsayimi kabul edilmektedir (p-value: {:.3f}).".format(pvalue3))
-            print("Anlamli bir fark yoktur.")
+        if ttest_pvalue >= 0.05:
+            print("T-Testine göre anlamli bir fark Yoktur. (p-value: {:.3f})".format(ttest_pvalue))
         else:
-            print("BEFORE grubunun normal dağilim varsayimi reddedilmiştir (p-value: {:.3f}).".format(pvalue3))
-            print("Anlamli fark vardir!")
-
-        if pvalue4 >= 0.05:
-            print("AFTER grubunun normal dağilim varsayimi kabul edilmektedir (p-value: {:.3f}).".format(pvalue4))
-        else:
-            print("AFTER grubunun normal dağilim varsayimi reddedilmiştir (p-value: {:.3f}).".format(pvalue4))
-
+            print("T-Testine göre anlamli bir fark Vardir. (p-value: {:.3f})".format(ttest_pvalue))
     else:
-        print("Levene Testi sonuçlarina göre varyanslar arasinda anlamli bir fark vardir (p-value: {:.3f}).".format(ttest_pvalue))
-        print("Bu durumda T-Testi uygulanacaktir.\n")
+        print("Varyanslar eşit değil, Nonparametrik test uygulaniyor...")
+        nont_test, nonp_value = wilcoxon(mix.BEFORE, mix.AFTER)
         
+        if nonp_value >= 0.05:
+            print("Wilcoxon testine göre anlamli bir fark Yoktur. (p-value: {:.3f})".format(nonp_value))
+        else:
+            print("Wilcoxon testine göre anlamli bir fark Vardir. (p-value: {:.3f})".format(nonp_value))
 else:
-    print("Anlamli bir fark olduğu tespit edilmiştir. T-Testi uygulanacaktir...")
-    ttest_ist, ttest_pvalue = stats.ttest_rel(mix.BEFORE, mix.AFTER)
-    
-    if ttest_pvalue >= 0.05:
-        print("T-Testi sonuçlarina göre anlamli bir fark yoktur (p-value: {:.3f}).".format(ttest_pvalue))
-    else:
-        print("T-Testi sonuçlarina göre anlamli bir fark vardir (p-value: {:.3f}).".format(ttest_pvalue))    
-
-# Nonparametrik testin uygulanmasi
-if ttest_pvalue < 0.05 and pvalue2 < 0.05:
-    print("Normal dağilim varsayimlari sağlanmadiği için Nonparametrik T-Testi (Wilcoxon testi) uygulanacaktir...")
-    nont_test, nonp_value = stats.wilcoxon(mix.BEFORE, mix.AFTER)
+    # Normal dağılım sağlanmadığında Wilcoxon testi
+    print("Normal dağilim sağlanmadiği için Wilcoxon testi uygulaniyor...")
+    nont_test, nonp_value = wilcoxon(mix.BEFORE, mix.AFTER)
     
     if nonp_value >= 0.05:
-        print("Wilcoxon testi sonuçlarina göre anlamli bir fark yoktur (p-value: {:.3f}).".format(nonp_value))
+        print("Wilcoxon testine göre anlamli bir fark Yoktur. (p-value: {:.3f})".format(nonp_value))
     else:
-        print("Wilcoxon testi sonuçlarina göre anlamli bir fark vardir (p-value: {:.3f}).".format(nonp_value))
-else:
-    print("Nonparametrik T-Testi (Wilcoxon testi) uygulanamamaktadir çünkü normal dağilim varsayimlari sağlanmamaktadir.")
+        print("Wilcoxon testine göre anlamli bir fark Vardir. (p-value: {:.3f})".format(nonp_value))
 
-print()  # Boş satir eklemek için
+nont_test, nonp_value = wilcoxon(mix.BEFORE, mix.AFTER)
 
-# Eğitim programinin etkinliği
-print("--- Eğitim Programinin Etkisi ---")
-if ttest_pvalue < 0.05:
+# Eğitim programının etkinliği
+print("\n--- Eğitim Programinin Etkisi ---")
+if nonp_value < 0.05:
     print("Eğitim programi, çalişanlarin performansinda anlamli bir iyileşme sağlamiştir.")
 else:
     print("Eğitim programi, çalişanlarin performansinda anlamli bir iyileşme sağlamamiştir.")
