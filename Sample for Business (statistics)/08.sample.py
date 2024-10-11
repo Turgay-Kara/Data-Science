@@ -8,7 +8,7 @@ IS UYGULAMASI
 
 # Detaylar:
 # Bir departman bir konuda eğitim talep ediyor
-# Gerekli/gereksiz değerlendirmeleri neticesinde eğitim aliniyor ■ Eğitimden önce ve sonra olacak şekilde gerekli ölçümler yapiliyor
+# Gerekli/gereksiz değerlendirmeleri neticesinde eğitim aliniyor. Eğitimden önce ve sonra olacak şekilde gerekli ölçümler yapiliyor
 # Eğitim sonrasinda eğitimin sağladiği katma değer test edilmek isteniyor
 
 
