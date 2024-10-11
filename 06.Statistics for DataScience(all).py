@@ -125,6 +125,7 @@ for i in np.arange(1,21):
 # p-Value
 # p < 0.05  ise  h0 hipotezi Reddedildi.
 
+
 """
 İstatistikte iki temel hipotez vardir:
 
@@ -151,9 +152,3 @@ Verilere dayali sonuclara gore sifir hipotezi reddedilebilir veya kabul edilebil
 # Adim 5: Yorum
 
 # Test istatistigi (Zh) > Tablo Degeri (Zt) ise H0 Red
-
-
-# iki Orneklem Oran Testi
-# 2 oran arasinda karsilastirma yapmak icin Kullanilir.
-# n1 > 30
-# n2 > 30
