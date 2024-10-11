@@ -152,3 +152,11 @@ Verilere dayali sonuclara gore sifir hipotezi reddedilebilir veya kabul edilebil
 # Adim 5: Yorum
 
 # Test istatistigi (Zh) > Tablo Degeri (Zt) ise H0 Red
+
+
+
+# pvalue >= 0.05
+# H0 Kabul (etki yok)
+
+# pvalue < 0.05
+# H1 Red (etki var)
