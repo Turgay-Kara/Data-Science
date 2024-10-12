@@ -1,5 +1,6 @@
 """
         VERI MANIPULASYONU (NumPy & Pandas)
+        
 """
 
 #Pandas: Verileri duzenleme, analize etme ve isleme
