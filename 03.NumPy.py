@@ -1,5 +1,6 @@
 """
         VERI MANIPULASYONU (NumPy)
+        
 """
 
 # NumPy -> Bilimsel islemler icin kullanilir.
