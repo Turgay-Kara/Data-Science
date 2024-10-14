@@ -161,6 +161,3 @@ Verilere dayali sonuclara gore sifir hipotezi reddedilebilir veya kabul edilebil
 
 # pvalue < 0.05
 # H1 Red (etki var)
-
-
-# iş örneklerinin üzerinden geç
