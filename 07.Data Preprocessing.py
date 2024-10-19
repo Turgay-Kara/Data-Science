@@ -183,7 +183,7 @@ import pandas as pd
 #print(df.notnull().sum())       # Eksik olmayan Değer sayisi
 #print(df.isnull().sum().sum())  # Toplam Eksik Değer
 
-#print(df.isnull())              # True = NaN degerler
+#print(df.isnull())              # True = nan degerler
 
 #print(df[df.isnull().any(axis = 1)])    # En az 1 tane eksik gözlem varsa Tüm satiri getirecek / axis=1 (sütun bazinda)
 #print(df[df.notnull().all(axis = 1)])   # Eksik değeri olmayan Satirlar
@@ -223,3 +223,168 @@ import matplotlib.pyplot as plt
 #plt.show()        # Heatmap ile Değişkenlerin arasindaki Korelasyonu rahatlikla belirledik.
 # Planets veri setinde rassal bir eksikliğe sahip değildir. Dolayisiyla,
 # Eksik değerlerin Silinmesi veya Doldurma işlemleri sakincali olabilir.
+
+
+
+# Silme İşlemleri
+#df = df.dropna(how = "all")            # 6.Satirin Tüm değerleri Eksik olduğu için tüm Satiri sildik.
+#df = df.dropna(axis = 1)               # En az 1 tane eksik değere sahip olan Satiri sil.
+#df["sil_beni"] = np.nan                # Tüm satirlari nan olan bir Sütun
+#df = df.dropna(axis = 1, how ="all")   # Tüm satirlari nan olan bir Sütunu sildik.
+#print(df)
+
+
+
+# Değer Atama (sayisal değişkenlerde)
+#print(df["V1"].fillna(0))                               # Eksik değerlere 0 atadik.
+#print(df["V1"].fillna(df["V1"].mean()))                 # Eksik değerleri ortalama ile doldurduk.
+#print(df.apply(lambda x: x.fillna(x.mean()), axis = 0)) # Tüm değişkenler için
+#print(df.fillna(df.mean()[:]))                          # Ayni işlem
+#print(df.fillna(df.mean()["V1":"V2"]))                  # V1 ve V2'yi ortalamalar ile,
+#print(df["V3"].fillna(df["V3"].median()))               # V3'ü median ile doldurduk.
+
+
+
+# Değer Atama (kategorik değişkenlerde)
+"""
+V1 = np.array([1,3,6,np.nan,7,1,np.nan,9,15])
+V2 = np.array([7,np.nan,5,8,12,np.nan,np.nan,2,3])
+V3 = np.array([np.nan,12,5,6,14,7,np.nan,2,31])
+V4 = np.array(["IT","IT","IK","IK","IK","IK","IK","IT","IT"])
+
+df = pd.DataFrame(
+        {"maas" : V1,
+         "V2" : V2,
+         "V3" : V3,
+        "departman" : V4}        
+)
+print(df)
+
+print(df.groupby("departman")["maas"].mean())
+
+print(df["maas"].fillna(df.groupby("departman")["maas"].transform("mean")))   # gruplara göre bölünüp hesaplanmiş olan ortalamalari boşluklara atadi.
+"""
+
+
+
+"""
+import numpy as np
+import pandas as pd
+V1 = np.array([1,3,6,np.nan,7,1,np.nan,9,15])
+V4 = np.array(["IT",np.nan,"IK","IK","IK","IK","IK","IT","IT"], dtype=object)
+
+df = pd.DataFrame(
+        {"maas" : V1,
+        "departman" : V4}        
+)
+print(df)
+
+print(df["departman"].fillna(df["departman"].mode()[0]))   # Departmandaki NaN değeri veri setinin Mod'u ile doldurduk.
+print(df["departman"].ffill())                             # Eksik değeri bir önceki  değer ile doldurduk.
+print(df["departman"].bfill())                             # Eksik değeri bir sonraki değer ile doldurduk.
+"""
+
+
+
+# Tahmine Dayali Değer Atama
+# Doldurma işlemleri
+
+#import seaborn as sns
+#import missingno as msno
+#df = sns.load_dataset('titanic')
+#df = df.select_dtypes(include = ['float64', 'int64'])
+#print(df.head())
+#print(df.isnull().sum())
+
+#import numpy as np
+#import pandas as pd
+#from ycimpute.imputer import knnimput
+#var_names = list(df)
+#n_df = np.array(df)
+#print(n_df[0:10])
+
+#df = knnimput.KNN(k = 4).complete(n_df)
+#df = pd.DataFrame(df, columns = var_names)
+#print(df.isnull().sum())
+
+
+
+# Random Forest
+#import seaborn as sns
+#import missingno as msno
+#df = sns.load_dataset('titanic')
+#df = df.select_dtypes(include = ['float64', 'int64'])
+#print(df.isnull().sum())
+
+#var_names = list(df)
+#n_df = np.array(df)
+#from sklearn.impute import SimpleImputer
+#n_dff = SimpleImputer(missing_values=np.nan, strategy="mean").fit(n_df).transform(n_df)
+#print(n_dff)
+
+#dff = pd.DataFrame(n_dff, columns= var_names)
+#print(dff.isnull().sum())
+
+
+
+# EM
+#import seaborn as sns
+#import missingno as msno
+#df = sns.load_dataset('titanic')
+#df = df.select_dtypes(include = ['float64', 'int64'])
+
+#from ycimpute.imputer import EM
+#var_names = list(df)
+#n_df = np.array(df)
+
+#dff = EM().complete(n_df)
+#dff = pd.DataFrame(dff, columns = var_names)
+#print(dff.isnull().sum())
+
+
+
+# Değişken Standardizasyonu (Veri Standardizasyonu)
+# Standartlaştirma: Veri setinin taşimiş olduğu bilgiyi aslini bozmadan belirli bir standarta getirir.
+# Dönüştürme: Veri setinin taşimiş olduğu bilgiyi bazen bozar, bazen temsil şeklini değiştirir.
+"""
+import numpy as np
+import pandas as pd
+V1 = np.array([1,3,6,5,7])
+V2 = np.array([7,7,5,8,12])
+V3 = np.array([6,12,5,6,14])
+
+df = pd.DataFrame(
+    {"V1": V1,
+     "V2": V2,
+     "V3": V3})
+
+df = df.astype(float)
+print(df)
+
+
+# Standardizasyon
+from sklearn import preprocessing
+print(preprocessing.scale(df))
+
+
+# Normalizasyon (0-1 arasinda)
+print(preprocessing.normalize(df))
+
+
+# Min-Max Dönüşümü (verilen aralikta dönüşüm)
+scaler = preprocessing.MinMaxScaler(feature_range = (10,20))
+print(scaler.fit_transform(df))
+"""
+
+
+
+# Değişken Dönüşümleri
+
+
+
+
+
+
+
+
+
