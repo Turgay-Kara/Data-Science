@@ -378,13 +378,35 @@ print(scaler.fit_transform(df))
 
 
 
-# Değişken Dönüşümleri
+# Değişken Dönüşümleri 
+import seaborn as sns
+df = sns.load_dataset("tips")
+#print(df.head())
+
+# 0-1 Dönüşümü (örneğin Male = 1, Female = 0)
+from sklearn.preprocessing import LabelEncoder
+lbe = LabelEncoder()
+df["new_sex"] = lbe.fit_transform(df["sex"])
+#print(df)
 
 
+# 1 ve Diğerleri(0) Dönüşümü
+import numpy as np
+df["new_day"] = np.where(df["day"].str.contains("Sun"), 1, 0)   # day kolonunun içerisinde "Sun" değeri varsa 1 ver, diğerlerine 0 ver.
+#print(df.head())
 
 
+# Çok Sinifli Dönüşüm (siniflari 0, 1, 2, 3... şeklinde dönüştürür.)
+from sklearn.preprocessing import LabelEncoder
+lbe = LabelEncoder()
+lbe.fit_transform(df["day"])
+#print(df)
 
 
+# One-Hot Dönüşümü ve Dummy Değişken Tuzaği
+df_one_hot = pd.get_dummies(df, columns= ["sex"], prefix=["sex"])
+#print(df_one_hot.head())
 
 
-
+# Dummy Değiken Tuzaği: ayni değeri ifade eden farkli değişkenler olduğunda ortaya çikar.
+print(pd.get_dummies(df, columns= ["day"], prefix=["day"]))
