@@ -201,8 +201,8 @@ import pandas as pd
 
 
 # Eksik Veri Yapisinin Görselleştirilmesi
-import missingno as msno
-import matplotlib.pyplot as plt
+#import missingno as msno
+#import matplotlib.pyplot as plt
 
 #msno.bar(df)
 #plt.show()       # Sol bar:yüzde, Sağ bar: tam gözlem sayisi
@@ -360,21 +360,21 @@ df = pd.DataFrame(
 
 df = df.astype(float)
 print(df)
-
+"""
 
 # Standardizasyon
-from sklearn import preprocessing
-print(preprocessing.scale(df))
+#from sklearn import preprocessing
+#print(preprocessing.scale(df))
 
 
 # Normalizasyon (0-1 arasinda)
-print(preprocessing.normalize(df))
+#print(preprocessing.normalize(df))
 
 
 # Min-Max Dönüşümü (verilen aralikta dönüşüm)
-scaler = preprocessing.MinMaxScaler(feature_range = (10,20))
-print(scaler.fit_transform(df))
-"""
+#scaler = preprocessing.MinMaxScaler(feature_range = (10,20))
+#print(scaler.fit_transform(df))
+
 
 
 
@@ -384,29 +384,47 @@ df = sns.load_dataset("tips")
 #print(df.head())
 
 # 0-1 Dönüşümü (örneğin Male = 1, Female = 0)
-from sklearn.preprocessing import LabelEncoder
-lbe = LabelEncoder()
-df["new_sex"] = lbe.fit_transform(df["sex"])
+#from sklearn.preprocessing import LabelEncoder
+#lbe = LabelEncoder()
+#df["new_sex"] = lbe.fit_transform(df["sex"])
 #print(df)
 
 
 # 1 ve Diğerleri(0) Dönüşümü
-import numpy as np
-df["new_day"] = np.where(df["day"].str.contains("Sun"), 1, 0)   # day kolonunun içerisinde "Sun" değeri varsa 1 ver, diğerlerine 0 ver.
+#import numpy as np
+#df["new_day"] = np.where(df["day"].str.contains("Sun"), 1, 0)   # day kolonunun içerisinde "Sun" değeri varsa 1 ver, diğerlerine 0 ver.
 #print(df.head())
 
 
 # Çok Sinifli Dönüşüm (siniflari 0, 1, 2, 3... şeklinde dönüştürür.)
-from sklearn.preprocessing import LabelEncoder
-lbe = LabelEncoder()
-lbe.fit_transform(df["day"])
+#from sklearn.preprocessing import LabelEncoder
+#lbe = LabelEncoder()
+#lbe.fit_transform(df["day"])
 #print(df)
 
 
 # One-Hot Dönüşümü ve Dummy Değişken Tuzaği
-df_one_hot = pd.get_dummies(df, columns= ["sex"], prefix=["sex"])
+#df_one_hot = pd.get_dummies(df, columns= ["sex"], prefix=["sex"])
 #print(df_one_hot.head())
 
 
 # Dummy Değiken Tuzaği: ayni değeri ifade eden farkli değişkenler olduğunda ortaya çikar.
-print(pd.get_dummies(df, columns= ["day"], prefix=["day"]))
+#print(pd.get_dummies(df, columns= ["day"], prefix=["day"]))
+
+
+# Surekli Değişkeni Kategorik Değişkene Çevirme
+#from sklearn import preprocessing
+#dff = df.select_dtypes(include=["float64", "int64"])
+#est = preprocessing.KBinsDiscretizer(n_bins=[3,2,2], encode="ordinal", strategy="quantile").fit(dff)
+#transformed_data = est.transform(dff)[0:10]
+#print(transformed_data[0:10])
+#print(est)
+
+
+# Değişkeni İndexe, İndexi Değişkene Çevirmek
+#df["yeni_degisken"] = df.index  # index değişkene çevrildi.
+#df['yeni_degisken'] = df['yeni_degisken'] + 10
+#print(df.head())
+
+#df.index = df['yeni_degisken']  # değişken indexe çevrildi.
+#print(df.index)
