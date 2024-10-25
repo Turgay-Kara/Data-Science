@@ -92,5 +92,5 @@
 #
 #
 #   Herhangi bir bakkal defterinde saat 12.00 - 15.00 araligindaki satislari ele alirsak:
-#   Bu satisten elde edilen kazanc yuksek ise bu bakkalin is yerlerine yakin bir konumda
+#   Bu satisten elde edilen kazanc en yuksek ise bu bakkalin is yerlerine yakin bir konumda
 #   oldugu varsayimini yapabiliriz.
