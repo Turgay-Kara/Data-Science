@@ -74,7 +74,7 @@
     # RANGE
 #print(list(range(10)))  #-> 0'dan 9'a kadar list seklinde yaz.
 #([*range(10)])      #-> Ayni sey daha pratik.
-#print([*range(1,10,2)])     #-> 1den baslayarak 9'a kadar ikiser sayarak git.
+#print([*range(1,10,2)])     #-> 1den baslayarak 9'a kadar ikiser artirarak git.
 
 #for sayi in range(10):      #-> 0'dan 9'a kadar say.
     #print(sayi)
