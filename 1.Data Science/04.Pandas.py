@@ -1,5 +1,5 @@
 """
-        VERI MANIPULASYONU (NumPy & Pandas)
+        VERI MANIPULASYONU (Pandas)
         
 """
 
